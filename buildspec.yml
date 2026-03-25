@@ -12,10 +12,14 @@ phases:
     commands:
       #list all files
       - ls -la
+      - echo "=== git rev ==="
       - git rev-parse HEAD || true
-      - cat package.json
+      - echo "=== stop_server.sh ==="
       - sed -n '1,20p' scripts/stop_server.sh
+      - echo "=== start_server.sh ==="
       - sed -n '1,20p' scripts/start_server.sh
+      - echo "=== appspec.yml ==="
+      - sed -n '1,50p' appspec.yml
       - echo Build phase...
       - echo enviroment variable
       - echo $ENV_VAR
