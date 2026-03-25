@@ -2,19 +2,25 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 20
     commands:
-      - n 20.10.0
-      - echo Installing dependencies...
+      # - n 20.10.0
       - npm install
+      - echo Installing dependencies...
   build:
     commands:
       #list all files
       - ls -la
+      - git rev-parse HEAD || true
+      - cat package.json
+      - sed -n '1,20p' scripts/stop_server.sh
+      - sed -n '1,20p' scripts/start_server.sh
       - echo Build phase...
       - echo enviroment variable
       - echo $ENV_VAR
 
 artifacts:
   files:
-      - "**/*"
+    - "**/*"
   base-directory: ./
